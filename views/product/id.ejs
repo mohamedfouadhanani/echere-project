@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head') %>
+		<link rel="stylesheet" href="/scrollbar.css" />
+
+		<script
+			src="https://code.jquery.com/jquery-3.2.1.min.js"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+			integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+			crossorigin="anonymous"
+		></script>
+		<title>E-COM | <%= product.name %></title>
+	</head>
+	<body>
+		<main class="flex h-screen">
+			<section
+				class="w-1/2 p-6 flex flex-col justify-between border-r-4 border-black"
+			>
+				<div>
+					<img src="<%= product.imageURL %>" class="rounded mb-1" />
+					<h1 class="text-4xl font-bold mb-4"><%= product.name %></h1>
+					<h4 class="font-light"><%= product.startingPrice %> DZD</h4>
+				</div>
+				<div>
+					<h4 class="text-xl font-semibold mb-2">Bidding stops on</h4>
+					<span class="text-4xl font-light text-gray-500">
+						<%= new Date(product.endDateTime).toDateString() %>
+					</span>
+				</div>
+			</section>
+			<section class="w-1/2 p-6">
+				<section class="h-2/3 overflow-y-scroll hide-scrollbar">
+					<h3 class="font-semibold text-2xl">Bids</h3>
+					<% if (errorMessage.length > 0) { %>
+					<div
+						class="m-2 bg-red-50 text-red-500 p-4 rounded ring ring-red-500 font-semibold"
+					>
+						<span><%= errorMessage %></span>
+					</div>
+					<% } %>
+					<div class="text-xl" id="bids"></div>
+				</section>
+				<section class="h-1/3 flex flex-col justify-end">
+					<form action="<%= FormUrl %>" method="post" class="space-y-4">
+						<div class="flex flex-col justify-between space-y-2">
+							<label for="raiseTo" class="font-semibold">Raise To</label>
+							<input
+								autocomplete="off"
+								type="number"
+								min="1"
+								id="raiseTo"
+								name="raiseTo"
+								required
+								class="ring ring-black p-2 rounded"
+							/>
+						</div>
+						<button
+							type="submit"
+							onclick="handleClick()"
+							class="ring ring-gray-900 hover:ring-gray-800 w-full bg-black bg-gray-900 hover:bg-gray-800 rounded text-white p-2 font-semibold cursor-pointer"
+						>
+							Raise
+						</button>
+						<a
+							href="/products"
+							class="ring ring-blue-500 hover:ring-blue-400 block text-center font-semibold bg-blue-500 text-white hover:bg-blue-400 rounded px-3 py-2"
+						>
+							Return
+						</a>
+					</form>
+				</section>
+			</section>
+		</main>
+		<script>
+			let showBids = (bids) => {
+				document.getElementById("bids").innerHTML = "";
+
+				let innerHTMLString = "";
+
+				for (let bid of bids) {
+					innerHTMLString += `
+					<div class="flex justify-between p-2 rounded ring ring-black font-bold m-2">
+						<div>${bid.user.fullname} (${bid.user.username})</div>
+						<div>${bid.price} DZD</div>
+					</div>
+					`;
+				}
+
+				document.getElementById("bids").innerHTML = innerHTMLString;
+			};
+
+			const socket = io("http://localhost:5000/");
+			let id = window.location.pathname.replace("/products/", "");
+
+			$.get(`http://localhost:5000/products/${id}/bids`, (bids) => {
+				showBids(bids);
+			});
+
+			let handleClick = () => {
+				let raiseTo = parseInt(document.getElementById("raiseTo").value);
+				let object = {
+					id,
+					raiseTo,
+				};
+				socket.emit("raise", object);
+			};
+
+			socket.on(`bid:${id}`, (bids) => {
+				// console.log("bids");
+				// console.log(bids);
+				showBids(bids);
+			});
+		</script>
+	</body>
+</html>

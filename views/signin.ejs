@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('partials/head') %>
+		<title>E-COM | Sign In</title>
+	</head>
+	<body>
+		<main class="max-w-xl mx-auto p-4 text-xl space-y-8">
+			<h1 class="text-6xl font-bold text-center">Sign In</h1>
+			<% if (errorMessage.length > 0) { %>
+			<div
+				class="bg-red-50 text-red-500 p-4 rounded ring ring-red-500 font-semibold"
+			>
+				<span><%= errorMessage %></span>
+			</div>
+			<% } %> <% if (successMessage.length > 0) { %>
+			<div
+				class="bg-green-50 text-green-500 p-4 rounded ring ring-green-500 font-semibold"
+			>
+				<span><%= successMessage %></span>
+			</div>
+			<% } %>
+			<form action="/authenticate/signin" method="POST" class="space-y-4">
+				<div class="flex flex-col justify-between space-y-2">
+					<label for="username" class="font-semibold">Username</label>
+					<input
+						autocomplete="off"
+						type="text"
+						id="username"
+						name="username"
+						required
+						placeholder="Enter Your Username..."
+						class="ring ring-black p-2 rounded"
+					/>
+				</div>
+				<div class="flex flex-col justify-between space-y-2">
+					<label for="password" class="font-semibold">Password</label>
+					<input
+						autocomplete="off"
+						type="password"
+						id="password"
+						name="password"
+						required
+						placeholder="Enter Your password..."
+						class="ring ring-black p-2 rounded"
+					/>
+				</div>
+				<input
+					type="submit"
+					value="Sign In"
+					class="w-full bg-black bg-gray-900 hover:bg-gray-800 rounded text-white p-2 font-semibold cursor-pointer"
+				/>
+			</form>
+		</main>
+	</body>
+</html>

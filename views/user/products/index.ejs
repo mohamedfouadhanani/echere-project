@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../../partials/head') %>
+		<title>E-COM | Products</title>
+	</head>
+	<body>
+		<%- include('../../partials/navbar') %>
+		<main class="max-w-6xl mx-auto my-4">
+			<% if (products.length == 0) { %>
+			<div
+				class="ring ring-green-500 text-green-500 bg-white rounded p-4 font-bold bg-green-100"
+			>
+				No owned products
+			</div>
+			<% }%> <% products.forEach(product => { %>
+			<div class="ring ring-black rounded">
+				<img
+					src="<%= product.imageURL %>"
+					class="block rounded-t h-52 object-fill"
+				/>
+				<div
+					class="h-auto border-t-4 border-black p-4 flex flex-col justify-between space-y-8"
+				>
+					<div class="flex flex-col justify-between space-y-2">
+						<h1 class="text-3xl font-semibold mb-2"><%= product.name %></h1>
+					</div>
+				</div>
+			</div>
+			<% }) %>
+		</main>
+	</body>
+</html>

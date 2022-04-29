@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head') %>
+		<title>E-COM | <%= title %></title>
+	</head>
+	<body>
+		<main class="max-w-xl mx-auto p-4 text-xl space-y-8">
+			<h1 class="text-6xl font-bold text-center"><%= title %></h1>
+			<% if (errorMessage.length > 0) { %>
+			<div
+				class="bg-red-50 text-red-500 p-4 rounded ring ring-red-500 font-semibold"
+			>
+				<span><%= errorMessage %></span>
+			</div>
+			<% } %>
+			<form action="<%= FormUrl %>" method="POST" class="space-y-4">
+				<!-- PRODUCT NAME -->
+				<div class="flex flex-col justify-between space-y-2">
+					<label for="name" class="font-semibold">Name</label>
+					<input
+						autocomplete="off"
+						type="text"
+						id="name"
+						value="<%= name %>"
+						name="name"
+						required
+						placeholder="Enter The Product Name..."
+						class="ring ring-black p-2 rounded"
+					/>
+				</div>
+				<!-- STARTING PRICE -->
+				<div class="flex flex-col justify-between space-y-2">
+					<label for="startingPrice" class="font-semibold"
+						>Starting Price</label
+					>
+					<input
+						autocomplete="off"
+						type="number"
+						min="0"
+						id="startingPrice"
+						value="<%= startingPrice %>"
+						name="startingPrice"
+						required
+						placeholder="Enter The Product Starting Price..."
+						class="ring ring-black p-2 rounded"
+					/>
+				</div>
+				<!-- PRODUCT SOLD TO -->
+				<div class="flex flex-col justify-between space-y-2">
+					<label for="soldTo" class="font-semibold">Sold To</label>
+					<input
+						autocomplete="off"
+						type="text"
+						id="soldTo"
+						value="<%= soldTo %>"
+						name="soldTo"
+						placeholder="Enter The Product OWNER..."
+						class="ring ring-black p-2 rounded"
+						readonly
+					/>
+				</div>
+				<!-- PRODUCT END DATETIME -->
+				<div class="flex flex-col justify-between space-y-2">
+					<label for="endDateTime" class="font-semibold">End DateTime</label>
+					<input
+						autocomplete="off"
+						type="date"
+						id="endDateTime"
+						value="<%= endDateTime %>"
+						name="endDateTime"
+						placeholder="Enter The Product End
+					DateTime..."
+						class="ring ring-black p-2 rounded"
+					/>
+				</div>
+				<!-- PRODUCT IMAGE URL -->
+				<div class="flex flex-col justify-between space-y-2">
+					<label for="imageURL" class="font-semibold">Image URL</label>
+					<input
+						autocomplete="off"
+						type="url"
+						id="imageURL"
+						value="<%= imageURL %>"
+						name="imageURL"
+						required
+						placeholder="Enter The Product Image URL..."
+						class="ring ring-black p-2 rounded"
+					/>
+				</div>
+				<input
+					type="submit"
+					value="OK"
+					class="w-full bg-black bg-gray-900 hover:bg-gray-800 rounded text-white p-2 font-semibold cursor-pointer"
+				/>
+				<a
+					href="/products"
+					class="block text-center font-semibold bg-blue-500 text-white hover:bg-blue-400 rounded px-3 py-2"
+				>
+					Return
+				</a>
+			</form>
+		</main>
+	</body>
+</html>
