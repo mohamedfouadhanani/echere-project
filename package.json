@@ -1,7 +1,7 @@
 {
 	"name": "code-base",
 	"version": "1.0.0",
-	"main": "index.js",
+	"main": "server.js",
 	"license": "MIT",
 	"dependencies": {
 		"connect-flash": "^0.1.1",
@@ -18,5 +18,8 @@
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.15"
+	},
+	"engines": {
+		"node": "14.x"
 	}
 }
