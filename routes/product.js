@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const path = require("path");
 
-let { products } = require(path.join(__dirname, "..", "database"));
+let { products, bids } = require(path.join(__dirname, "..", "database"));
 
 // IMPORT AUTHENTICATION MIDDLEWARES
 const { isAuthenticated, isAdmin } = require(path.join(
@@ -126,7 +126,7 @@ router.post("/update/:id", isAuthenticated, isAdmin, (req, res) => {
 router.get("/delete/:id", (req, res) => {
 	let { id } = req.params;
 	products = products.filter((product) => product.id !== parseInt(id));
-
+	bids = bids.filter((bid) => bid.productId !== parseInt(id));
 	res.redirect("/products");
 });
 
