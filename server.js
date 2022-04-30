@@ -40,6 +40,10 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 // ROUTES
+server.get("/", (req, res) => {
+	res.redirect("/products");
+});
+
 server.get("/products/:id/bids", (req, res) => {
 	let { id } = req.params;
 	let product = products.find((product) => product.id === parseInt(id));
