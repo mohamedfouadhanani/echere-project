@@ -76,7 +76,6 @@
 			</section>
 		</main>
 		<script>
-			console.log(window.location);
 			let showBids = (bids) => {
 				document.getElementById("bids").innerHTML = "";
 
@@ -97,7 +96,7 @@
 			const socket = io(window.location.origin);
 			let id = window.location.pathname.replace("/products/", "");
 
-			$.get(`http://localhost:5000/products/${id}/bids`, (bids) => {
+			$.get(`${window.location.origin}/products/${id}/bids`, (bids) => {
 				showBids(bids);
 			});
 
