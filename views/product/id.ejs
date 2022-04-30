@@ -28,7 +28,7 @@
 				<div>
 					<h4 class="text-xl font-semibold mb-2">Bidding stops on</h4>
 					<span class="text-4xl font-light text-gray-500">
-						<%= new Date(product.endDateTime).toDateString() %>
+						<%= new Date(product.endDateTime).toGMTString() %>
 					</span>
 				</div>
 			</section>

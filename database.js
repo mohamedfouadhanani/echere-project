@@ -4,7 +4,7 @@ let products = [
 		name: "Akatsuki Poster",
 		startingPrice: 1000,
 		soldTo: null,
-		endDateTime: "2022-05-05",
+		endDateTime: "2022-05-02T23:00",
 		imageURL: "https://wallpaper.dog/large/20495721.jpg",
 	},
 	{
@@ -12,7 +12,7 @@ let products = [
 		name: "Sukuna Poster",
 		startingPrice: 1200,
 		soldTo: null,
-		endDateTime: "2022-05-05",
+		endDateTime: "2022-05-02T23:00",
 		imageURL:
 			"https://boutiquejujutsukaisen.com/wp-content/uploads/2021/06/poster-jujutsu-kaisen-sukuna-fond-rouge.jpg",
 	},

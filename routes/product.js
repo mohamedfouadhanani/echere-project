@@ -37,6 +37,7 @@ router.get("/create", isAuthenticated, isAdmin, (req, res) => {
 
 router.post("/create", isAuthenticated, isAdmin, (req, res) => {
 	let { name, startingPrice, soldTo, endDateTime, imageURL } = req.body;
+
 	if (new Date(endDateTime).getTime() < Date.now()) {
 		req.flash("errorMessage", "Incorrect date...");
 		req.flash("name", name);
@@ -101,7 +102,7 @@ router.post("/update/:id", isAuthenticated, isAdmin, (req, res) => {
 		return res.redirect("/products");
 	}
 
-	if (new Date(endDateTime).getTime < Date.now()) {
+	if (new Date(endDateTime).getTime() < Date.now()) {
 		req.flash("errorMessage", "Incorrect date...");
 		req.flash("name", name);
 		req.flash("startingPrice", startingPrice);

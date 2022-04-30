@@ -44,6 +44,11 @@ server.get("/", (req, res) => {
 	res.redirect("/products");
 });
 
+server.get("/database", (req, res) => {
+	let database = { bids, products, users };
+	res.json(database);
+});
+
 server.get("/products/:id/bids", (req, res) => {
 	let { id } = req.params;
 	let product = products.find((product) => product.id === parseInt(id));
@@ -91,15 +96,6 @@ server.post("/products/:id/bids", isAuthenticated, (req, res) => {
 	}
 
 	if (new Date(product.endDateTime).getTime() < Date.now()) {
-		if (product.soldTo == null) {
-			let productBids = bids.filter((bid) => bid.productId == product.id);
-			let maximumBid = productBids.reduce((prev, current) => {
-				return prev.price > current.price ? prev : current;
-			});
-
-			products[productIndex].soldTo = maximumBid.userId;
-		}
-
 		req.flash("errorMessage", "Bidding over...");
 
 		return res.redirect("/products");

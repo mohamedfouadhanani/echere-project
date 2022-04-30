@@ -13,21 +13,25 @@
 			>
 				No owned products
 			</div>
-			<% }%> <% products.forEach(product => { %>
-			<div class="ring ring-black rounded">
-				<img
-					src="<%= product.imageURL %>"
-					class="block rounded-t h-52 object-fill"
-				/>
-				<div
-					class="h-auto border-t-4 border-black p-4 flex flex-col justify-between space-y-8"
-				>
-					<div class="flex flex-col justify-between space-y-2">
-						<h1 class="text-3xl font-semibold mb-2"><%= product.name %></h1>
+			<% }%>
+
+			<section class="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+				<% products.forEach(product => { %>
+				<div class="ring ring-black rounded">
+					<img
+						src="<%= product.imageURL %>"
+						class="block rounded-t h-52 object-fill"
+					/>
+					<div
+						class="h-auto border-t-4 border-black p-4 flex flex-col justify-between space-y-8"
+					>
+						<div class="flex flex-col justify-between space-y-2">
+							<h1 class="text-3xl font-semibold mb-2"><%= product.name %></h1>
+						</div>
 					</div>
 				</div>
-			</div>
-			<% }) %>
+				<% }) %>
+			</section>
 		</main>
 	</body>
 </html>
