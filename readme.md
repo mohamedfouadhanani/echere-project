@@ -2,4 +2,4 @@
 
 ### Echere
 
-[demo](echere-project.heroku.com)
+[demo](https://echere-project.heroku.com/)
