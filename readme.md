@@ -2,4 +2,4 @@
 
 ### Echere
 
-[demo](https://echere-project.heroku.com/)
+[demo](https://enchere-project.herokuapp.com/)
